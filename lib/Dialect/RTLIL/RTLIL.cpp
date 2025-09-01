@@ -43,6 +43,19 @@ using namespace circt::rtlil;
 #include "circt/Dialect/RTLIL/RTLILOpsTypes.cpp.inc"
 #undef GET_TYPEDEF_CLASSES
 
+/// Convert a string literal initializer list to MLIR ArrayAttr
+mlir::ArrayAttr createStringArrayAttr(mlir::MLIRContext *context, 
+                                std::initializer_list<const char*> strings) {
+    mlir::OpBuilder builder(context);
+    std::vector<mlir::Attribute> stringAttrs;
+    
+    for (const char* str : strings) {
+        stringAttrs.push_back(builder.getStringAttr(str));
+    }
+    
+    return builder.getArrayAttr(stringAttrs);
+}
+
 void RTLILDialect::initialize() {
   addOperations<
 #define GET_OP_LIST

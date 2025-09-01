@@ -25,6 +25,10 @@
 #include "mlir/Interfaces/DerivedAttributeOpInterface.h"
 #include "mlir/Interfaces/SideEffectInterfaces.h"
 
+/// Convert a string literal initializer list to MLIR ArrayAttr
+mlir::ArrayAttr createStringArrayAttr(mlir::MLIRContext *context, 
+                                std::initializer_list<const char*> strings);
+
 #include "circt/Dialect/RTLIL/RTLILInterfaces.h.inc"
 #define GET_TYPEDEF_CLASSES
 #include "circt/Dialect/RTLIL/RTLILOpsTypes.h.inc"
