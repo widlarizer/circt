@@ -118,6 +118,7 @@ def WireOp : RTLIL_Op<"wire"> {
                        ,DefaultValuedAttr<BoolAttr, "false">:$port_input
                        ,DefaultValuedAttr<BoolAttr, "false">:$port_output
                        ,DefaultValuedAttr<BoolAttr, "false">:$upto
+                       ,DefaultValuedAttr<DictionaryAttr, "{}">:$extraAttrs
   );
   DerivedAttr width = DerivedAttr<"::mlir::IntegerAttr", [{
         return mlir::IntegerAttr::get(mlir::IntegerType::get(getContext(), 32), llvm::cast<mlir::IntegerAttr>(llvm::cast<rtlil::MValueType>(this->getResult().getType()).getWidth()).getValue());

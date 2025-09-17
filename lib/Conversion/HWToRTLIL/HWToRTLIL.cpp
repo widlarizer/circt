@@ -203,10 +203,9 @@ struct BinOpConversion<BinOp, ResultOp,
     auto resultWire = Super::genLocalWire(op->getLoc(), op->getResult(0), r);
     std::vector<Value> connections(
         {adaptor.getInputs()[0], adaptor.getInputs()[1], resultWire});
-<<<<<<< HEAD:lib/Conversion/HWToRTLIL/HWToRTLIL.cpp
     r.create<ResultOp>(op->getLoc(), Super::genLocal(r), std::move(connections),
                        op.getInputs()[0].getType().getIntOrFloatBitWidth(),
-                       false);
+                       false, nullptr);
     r.replaceOp(op, resultWire);
     return success();
   }
@@ -230,7 +229,7 @@ struct BinOpConversion<BinOp, ResultOp,
     std::vector<Value> connections(
         {adaptor.getLhs(), adaptor.getRhs(), resultWire});
     r.create<ResultOp>(op->getLoc(), Super::genLocal(r), std::move(connections),
-                       op.getLhs().getType().getIntOrFloatBitWidth(), false);
+                       op.getLhs().getType().getIntOrFloatBitWidth(), false, nullptr);
     r.replaceOp(op, resultWire);
     return success();
   }
@@ -250,20 +249,9 @@ struct MuxOpConversion : ConversionPatternBase<MuxOp> {
                             adaptor.getCond(), resultWire};
 
     r.create<rtlil::MuxOp>(op->getLoc(), genLocal(r), connections,
-                           op.getTrueValue().getType().getIntOrFloatBitWidth());
+                           op.getTrueValue().getType().getIntOrFloatBitWidth(), nullptr);
     r.replaceOp(op, resultWire);
 
-||||||| parent of e43b39ec1 (Add RTLIL attribute support):lib/Conversion/CombToRTLIL/CombToRTLIL.cpp
-    rewriter.create<rtlil::AndOp>(
-        op->getLoc(), genLocal(rewriter), std::move(connections),
-        op.getInputs()[0].getType().getIntOrFloatBitWidth(), false);
-    rewriter.replaceOp(op, resultWire);
-=======
-    rewriter.create<rtlil::AndOp>(
-        op->getLoc(), genLocal(rewriter), std::move(connections),
-        op.getInputs()[0].getType().getIntOrFloatBitWidth(), false, nullptr);
-    rewriter.replaceOp(op, resultWire);
->>>>>>> e43b39ec1 (Add RTLIL attribute support):lib/Conversion/CombToRTLIL/CombToRTLIL.cpp
     return success();
   }
 };
