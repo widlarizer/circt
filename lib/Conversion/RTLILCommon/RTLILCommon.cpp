@@ -44,9 +44,10 @@ mlir::Value RTLILTypeConverter::materializeInt(mlir::OpBuilder &builder,
   if (!isInput) {
     name = builder.getStringAttr(llvm::formatv("${0}", asOperandRaw(vals[0])));
   }
+  // TODO Location like in rtlil-emit.cpp
   return builder.create<rtlil::WireOp>(
       pos, t, name, cast<mlir::IntegerAttr>(t.getWidth()).getInt(), 0, 0,
-      isInput, 0, 0, 0);
+      isInput, 0, 0, 0, mlir::DictionaryAttr{});
 }
 
 RTLILTypeConverter::RTLILTypeConverter() : mlir::TypeConverter() {

@@ -115,6 +115,7 @@ def WireOp : RTLIL_Op<"wire"> {
                        ,DefaultValuedAttr<BoolAttr, "false">:$port_output
                        ,DefaultValuedAttr<BoolAttr, "false">:$upto
                        ,BoolAttr:$is_signed
+                       ,DefaultValuedAttr<DictionaryAttr, "{}">:$extraAttrs
   );
   let results = (outs RTLILValue:$result);
 }
