@@ -170,7 +170,7 @@ struct FirRegOpResetConversion : ConversionPatternBase<seq::FirRegOp> {
         Value connections2[3] = {syncedResetWire, adaptor.getReset(),
                                  bufferedResetWire};
         rewriter.create<rtlil::AndOp>(op->getLoc(), genLocal(rewriter),
-                                      connections2, 1, false, nullptr);
+                                      connections2, 1, false);
       }
       std::vector<Value> connections({adaptor.getClk(), adaptor.getNext(),
                                       bufferedResetWire,
@@ -205,7 +205,7 @@ struct BinOpConversion<BinOp, ResultOp,
         {adaptor.getInputs()[0], adaptor.getInputs()[1], resultWire});
     r.create<ResultOp>(op->getLoc(), Super::genLocal(r), std::move(connections),
                        op.getInputs()[0].getType().getIntOrFloatBitWidth(),
-                       false, nullptr);
+                       false);
     r.replaceOp(op, resultWire);
     return success();
   }
@@ -229,7 +229,7 @@ struct BinOpConversion<BinOp, ResultOp,
     std::vector<Value> connections(
         {adaptor.getLhs(), adaptor.getRhs(), resultWire});
     r.create<ResultOp>(op->getLoc(), Super::genLocal(r), std::move(connections),
-                       op.getLhs().getType().getIntOrFloatBitWidth(), false, nullptr);
+                       op.getLhs().getType().getIntOrFloatBitWidth(), false);
     r.replaceOp(op, resultWire);
     return success();
   }
@@ -249,7 +249,7 @@ struct MuxOpConversion : ConversionPatternBase<MuxOp> {
                             adaptor.getCond(), resultWire};
 
     r.create<rtlil::MuxOp>(op->getLoc(), genLocal(r), connections,
-                           op.getTrueValue().getType().getIntOrFloatBitWidth(), nullptr);
+                           op.getTrueValue().getType().getIntOrFloatBitWidth());
     r.replaceOp(op, resultWire);
 
     return success();
