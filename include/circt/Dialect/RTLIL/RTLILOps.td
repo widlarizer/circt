@@ -212,7 +212,8 @@ def MuxOp : RTLILOp<"mux", [DeclareOpInterfaceMethods<CellOpInterface>, FixedOpe
                       Variadic<RTLILValue>:$connections,
                       I32Attr:$width,
                       DefaultValuedAttr<StrAttr, [{"$$mux"}]>:$type,
-                      DefaultValuedAttr<StrArrayAttr, [{ {"\\A", "\\B", "\\S", "\\Y"} }]>:$ports);
+                      DefaultValuedAttr<StrArrayAttr, [{ {"\\A", "\\B", "\\S", "\\Y"} }]>:$ports,
+                      DefaultValuedAttr<DictionaryAttr, "{}">:$extraAttrs);
   DerivedAttr parameters = DerivedAttr<"::mlir::ArrayAttr", [{
                             return ::circt::rtlil::createParamArrayAttr(getContext(), {
                               {"\\WIDTH", 32, getWidth()},
