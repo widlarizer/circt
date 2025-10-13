@@ -31,5 +31,5 @@ module @top {
 
   "rtlil.aldff"(%clk, %6, %clk, %6, %1) <{name="$7",width= 32 : i32}> : (!rtlil<val[1 : i32]>, !rtlil<val[32 : i32]>,!rtlil<val[1 : i32]>,!rtlil<val[32 : i32]>, !rtlil<val[32 : i32]>) -> ()
 
-  "rtlil.instance"(%1, %6) <{name="$inst", type=@"\\add", ports = ["input", "output"], parameters = []}> : (!rtlil<val[32 : i32]>, !rtlil<val[32 : i32]>) -> ()
+  "rtlil.instance"(%1, %6) <{name="$inst", moduleName=@"\\add", ports = ["input", "output"], parameters = []}> : (!rtlil<val[32 : i32]>, !rtlil<val[32 : i32]>) -> ()
 }
