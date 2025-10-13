@@ -15,6 +15,6 @@ hw.module @ormod(in %x: i32, in %y: i32, out res1: i32, out res2: i32) {
 
 // CHECK-LABEL: @"\\test_{{[0-9]*}}"
 hw.module @test(in %x : i32, in %y : i32) {
-  // CHECK-DAG: "rtlil.instance"(%[[X:.+]], %[[Y:.+]], %[[RES1:.+]], %[[RES2:.+]]) <{{{.*}}ports = ["\\x_[[XIN]]", "\\y_[[YIN]]", "\\res1_[[RES1OUT]]", "\\res2_[[RES2OUT]]"]{{.*}}type = [[ORMOD]]}> : (!rtlil<val[32 : i32]>, !rtlil<val[32 : i32]>, !rtlil<val[32 : i32]>, !rtlil<val[32 : i32]>) -> ()
+  // CHECK-DAG: "rtlil.instance"(%[[X:.+]], %[[Y:.+]], %[[RES1:.+]], %[[RES2:.+]]) <{{{.*}}moduleName = [[ORMOD]], {{.*}}ports = ["\\x_[[XIN]]", "\\y_[[YIN]]", "\\res1_[[RES1OUT]]", "\\res2_[[RES2OUT]]"]{{.*}}}> : (!rtlil<val[32 : i32]>, !rtlil<val[32 : i32]>, !rtlil<val[32 : i32]>, !rtlil<val[32 : i32]>) -> ()
   %1, %2 = hw.instance "instance1" @ormod(x: %x : i32, y: %y : i32) -> (res1: i32, res2: i32)
 }
